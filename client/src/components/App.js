@@ -10,7 +10,7 @@ import Header from './Header';
 
 const App = () => {
 	return (
-		<div className="bg-mid-gray">
+		<div className="bg-dark-gray">
 			<div className="ui container white">
 				<BrowserRouter>
 					<div>
