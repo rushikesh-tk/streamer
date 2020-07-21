@@ -27,11 +27,11 @@ class StreamList extends React.Component {
 
 	renderList(){
 		if(!this.props.streams[0] && !this.props.isSignedIn){
-			return <h4>Oops...Seems to be no streams here<br/>SignIn to Create One</h4>
+			return <h4 className="i">Oops...Seems to be no streams here<br/>SignIn to Create One</h4>
 		}
 
 		if(!this.props.streams[0] && this.props.isSignedIn){
-			return <h4>Click on Create Stream to Add One</h4>
+			return <h4 className="i">Click on Create Stream to Add One</h4>
 		}
 
 		return this.props.streams.map(stream => {
@@ -76,15 +76,26 @@ class StreamList extends React.Component {
 	}
 
 	render(){
-		return (
-			<div>
-				{this.renderCreate()}
-				<h2>Streams</h2>
-				<div className="ui celled list">
-					{this.renderList()}
+		if(this.props.isSignedIn){
+			return (
+				<div>
+					{this.renderCreate()}
+					<h2 className="i">Streams</h2>
+					<div className="ui celled list">
+						{this.renderList()}
+					</div>
 				</div>
-			</div>
-		);
+			);
+		}
+		else {
+			return (
+				<div className="i">
+					<h1>Please SignIn</h1>
+					<h2>To Stream</h2>
+					<h3>Your Videos</h3>
+				</div>
+			);
+		}
 	}	
 }
 
