@@ -1,3 +1,16 @@
 {
-	"streams" : []
+  "streams": [
+    {
+      "title": "My First Stream",
+      "description": "Hey Guys, It s Been Long so long",
+      "userId": "109801459621832176288",
+      "id": 1
+    },
+    {
+      "title": "Here, Im Again to amaze you",
+      "description": "Glad to be here",
+      "userId": "109801459621832176288",
+      "id": 2
+    }
+  ]
 }
