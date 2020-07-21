@@ -14,43 +14,59 @@ class StreamList extends React.Component {
 			if(stream.userId === this.props.currentUserId){
 				return (
 					<div className="right floated content">
-						<Link to={`/streams/edit/${stream.id}`} className="positive ui button">Edit</Link>
-						<button className="ui negative button">
+						<Link to={`/streams/edit/${stream.id}`} className="positive ui button">
+							Edit
+						</Link>
+						<Link to={`/streams/delete/${stream.id}`} className="ui negative button">
 							Delete
-						</button>					
+						</Link>					
 					</div>
 				);
 			}
 		}
 
 	renderList(){
+		if(!this.props.streams[0] && !this.props.isSignedIn){
+			return <h4>Oops...Seems to be no streams here<br/>SignIn to Create One</h4>
+		}
+
+		if(!this.props.streams[0] && this.props.isSignedIn){
+			return <h4>Click on Create Stream to Add One</h4>
+		}
+
 		return this.props.streams.map(stream => {
 			return (
 					<div className="item" style={{ padding : '15px' }} key={stream.id}>
 						{this.renderAdmin(stream)}
-						<i className="large middle aligned icon camera"/>
+						<i className="large middle aligned icon tv"/>
 						<div className="content">
-							<div className="f4">
-								{stream.title}
+							<div className="f3">
+								<Link 
+									to={`/streams/${stream.id}`}
+
+								>
+									{stream.title}
+								</Link>
 							</div>
 							
-							<div className="description">
+							<div className="description pt2 b" >
 								{stream.description}
 							</div>
 						</div>				
-				</div>);
-			})
-		}
+				</div>
+			);
+		})
+	}
 
 	renderCreate(){
 		if(this.props.isSignedIn){
 			return (
 				<div style={{ textAlign : "right"}}>
 					<Link to='streams/new'>
-						<div className="ui animated fade secondary button">
+						<div className="ui animated secondary button">
 						  <div className="visible content">Create Stream</div>
 						  <div className="hidden content">
-						    <i className="large middle aligned icon camera"></i>
+						    <i className="middle aligned icon tv"></i>
 						  </div>
 						</div>
 					</Link>
@@ -62,11 +78,11 @@ class StreamList extends React.Component {
 	render(){
 		return (
 			<div>
+				{this.renderCreate()}
 				<h2>Streams</h2>
 				<div className="ui celled list">
 					{this.renderList()}
 				</div>
-				{this.renderCreate()}
 			</div>
 		);
 	}	
